@@ -1,10 +1,7 @@
-validCC :: Integer
-validCC = 5424181210750423
 
-toDigits :: Integer -> [Integer]
-toDigits x
-	| x <= 0 = []
-	| otherwise = toDigits (div x 10) ++ [mod x 10]
+toDigits :: String -> [Integer]
+toDigits [] = []
+toDigits (x:xs) = read [x] : toDigits xs
 
 toDigitsReverse :: [Integer] -> [Integer]
 toDigitsReverse xr = reverse xr
@@ -23,7 +20,7 @@ sumDigits [x] = sum' x
 sumDigits (x:xs) = sum' x + sumDigits xs
 	
 
-validate :: Integer -> Bool
+validate :: String -> Bool
 validate x
 	| s `mod` 10 == 0 = True
 	| otherwise = False
