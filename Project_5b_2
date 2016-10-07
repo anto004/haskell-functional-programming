@@ -1,0 +1,15 @@
+1.	doubleAndSum :: [Int] -> Int
+
+{- we're using foldr not foldl because we want to double every other number from the right, if we used foldl we would have to reverse the list then double every other.
+-}
+2.	doubleAndSum = fst . 
+3.	               foldr (\i (acc, even) -> (acc + nextStep even i, not even)) (0, False)
+4.	   where 
+5.	     nextStep even i
+6.	      | even      = (uncurry (+) . (`divMod` 10) . (*2)) i
+7.	      | otherwise = i 
+8.	myLuhn :: Int -> Bool
+9.	myLuhn = (0 ==) . (`mod` 10) . doubleAndSum . (map (read . (: ""))) . show
+10.	testCC :: [Bool]
+11.	testCC = map myLuhn [49927398716, 49927398717, 1234567812345678, 1234567812345670]
+12.	-- => [True, False, False, True]
